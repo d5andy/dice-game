@@ -1,0 +1,40 @@
+{
+	"variables": [],
+	"info": {
+		"name": "dice-game",
+		"_postman_id": "9553ecf6-a086-e443-052f-28587e788585",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Play",
+			"request": {
+				"url": {
+					"raw": "{{url}}/snakeeyes/play?stake={{stake}}",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"snakeeyes",
+						"play"
+					],
+					"query": [
+						{
+							"key": "stake",
+							"value": "{{stake}}",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
