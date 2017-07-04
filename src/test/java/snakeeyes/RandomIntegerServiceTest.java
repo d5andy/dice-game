@@ -17,11 +17,11 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RunWith(SpringRunner.class)
-@RestClientTest(RandomNumberService.class)
-public class RandomNumberServiceTest {
+@RestClientTest(RandomDiceService.class)
+public class RandomIntegerServiceTest {
 
     @Autowired
-    private RandomNumberService client;
+    private RandomDiceService client;
 
     @Autowired
     private MockRestServiceServer server;
@@ -39,7 +39,7 @@ public class RandomNumberServiceTest {
     @Test
     public void parseRandomServerResponseCorrectly() {
 
-        List<Integer> randomNumbers = client.randomNumbers().get();
+        List<Integer> randomNumbers = client.randomIntegers(2).get();
 
         Assert.assertArrayEquals(randomNumbers.toArray(), numbers);
     }

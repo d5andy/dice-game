@@ -4,7 +4,7 @@ import java.util.List;
 
 public class SnakeEyesGame {
 
-    public double stakeOutcome(List<Integer> dice, Stake stake) {
+    public double calculateWinnings(List<Integer> dice, Stake stake) {
         int multiplier = 0;
         if (dice.get(0).equals(dice.get(1))) {
             if (dice.get(0).equals(1)) {

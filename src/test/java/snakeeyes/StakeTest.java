@@ -1,9 +1,13 @@
 package snakeeyes;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.Optional;
+
+import static org.junit.Assert.assertEquals;
+import static snakeeyes.Stake.toStake;
 
 public class StakeTest {
     @Rule
@@ -11,15 +15,14 @@ public class StakeTest {
 
     @Test
     public void expectStakeToBeAccepted() {
-        Assert.assertEquals(Stake.toStake(1.0), Stake.one);
-        Assert.assertEquals(Stake.toStake(2.0), Stake.two);
-        Assert.assertEquals(Stake.toStake(10.0), Stake.ten);
+        assertEquals(toStake(1.0).get(), Stake.one);
+        assertEquals(toStake(2.0).get(), Stake.two);
+        assertEquals(toStake(10.0).get(), Stake.ten);
     }
 
     @Test()
     public void expectStakeToBeRejected() {
-        thrown.expect(IllegalArgumentException.class);
-        Stake.toStake(1.1);
+        assertEquals(Optional.empty(), toStake(1.1));
     }
 
 }

@@ -1,6 +1,7 @@
 package snakeeyes;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Stake {
 
@@ -12,10 +13,9 @@ public enum Stake {
         this.value = value;
     }
 
-    public static Stake toStake(double value) {
+    public static Optional<Stake> toStake(double value) {
         return Arrays.stream(values())
                 .filter(n -> n.value == value)
-                .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .findFirst();
     }
 }
