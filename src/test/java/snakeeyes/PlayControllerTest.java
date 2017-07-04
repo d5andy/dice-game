@@ -30,7 +30,7 @@ public class PlayControllerTest {
 
         String expectedOutcome = "{\"dice1\":1,\"dice2\":1,\"stake\":1.0,\"winnings\":30.0,\"payout_name\":\"snake eyes\"}";
 
-        given(randomDiceService.randomIntegers(2)).willReturn(Optional.of(ImmutableList.of(1, 1)));
+        given(randomDiceService.randomDice(2)).willReturn(Optional.of(ImmutableList.of(1, 1)));
 
         ResponseEntity<String> responseEntity = playWithStake("1.0");
 
@@ -42,7 +42,7 @@ public class PlayControllerTest {
     @Test
     public void badStake() {
 
-        given(randomDiceService.randomIntegers(2)).willReturn(Optional.of(ImmutableList.of(1, 1)));
+        given(randomDiceService.randomDice(2)).willReturn(Optional.of(ImmutableList.of(1, 1)));
 
         ResponseEntity<String> responseEntity = playWithStake("1.1");
 
@@ -52,7 +52,7 @@ public class PlayControllerTest {
     @Test
     public void missingExternalService() {
 
-        given(randomDiceService.randomIntegers(2)).willReturn(Optional.empty());
+        given(randomDiceService.randomDice(2)).willReturn(Optional.empty());
 
         ResponseEntity<String> responseEntity = playWithStake("1.0");
 

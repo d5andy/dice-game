@@ -43,6 +43,13 @@ Run the following commands to run
 * `docker pull d5andy/dice-game:1`
 * `docker run -p 8080:8080 d5andy/dice-game:1`
 
+How to Build and Push to Docker
+-------------------------------
+
+Run the following commands:
+* `docker build -t d5andy/dice-game:1 .`
+* `docker push d5andy/dice-game:1 `
+
 POSTMAN
 -------
 

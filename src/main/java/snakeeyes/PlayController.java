@@ -26,7 +26,7 @@ public class PlayController {
     }
 
     private ResponseEntity playForStakes(Stake stake) {
-        return randomDiceService.randomIntegers(2)
+        return randomDiceService.randomDice(2)
                 .map( dice -> calculateTheWinnings(stake, dice))
                 .orElse( randomNumberServiceFailedResponse() );
     }

@@ -39,7 +39,7 @@ public class RandomDiceServiceTest {
     @Test
     public void parseRandomServerResponseCorrectly() {
 
-        List<Integer> randomNumbers = client.randomIntegers(2).get();
+        List<Integer> randomNumbers = client.randomDice(2).get();
 
         Assert.assertArrayEquals(randomNumbers.toArray(), numbers);
     }

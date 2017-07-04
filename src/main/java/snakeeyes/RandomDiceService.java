@@ -25,7 +25,7 @@ public class RandomDiceService {
         this.restTemplate = restTemplate;
     }
 
-    public Optional<List<Integer>> randomIntegers(int number) {
+    public Optional<List<Integer>> randomDice(int number) {
         ResponseEntity<String> responseEntity = requestIntegers(number);
         if (successful(responseEntity)) {
             List<Integer> integers = convertToIntegers(responseEntity.getBody());
@@ -40,7 +40,7 @@ public class RandomDiceService {
         return restTemplate.getForEntity(serverUrl, String.class);
     }
 
-    List<Integer> convertToIntegers(String body) {
+    private List<Integer> convertToIntegers(String body) {
         return Arrays.stream(body.split(TAB))
                 .map(n -> n.replaceAll(SPACES, EMPTY_STRING))
                 .map(Integer::parseInt)
