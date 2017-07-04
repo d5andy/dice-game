@@ -18,7 +18,7 @@ import static org.springframework.test.web.client.response.MockRestResponseCreat
 
 @RunWith(SpringRunner.class)
 @RestClientTest(RandomDiceService.class)
-public class RandomIntegerServiceTest {
+public class RandomDiceServiceTest {
 
     @Autowired
     private RandomDiceService client;
