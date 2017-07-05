@@ -19,7 +19,7 @@ public class PlayController {
     private SnakeEyesGame snakeEyesGame = new SnakeEyesGame();
 
     @RequestMapping(value = "/snakeeyes/play", method = RequestMethod.GET)
-    public ResponseEntity play(@RequestParam(value="stake", defaultValue = "0.0") Double stake) {
+    public ResponseEntity play(@RequestParam(value="stake") Double stake) {
         return Stake.toStake(stake)
                 .map(this::playForStakes)
                 .orElse( badStakeQueryParameterResponse() );

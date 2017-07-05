@@ -1,27 +1,26 @@
 package snakeeyes;
 
-import org.junit.Ignore;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.boot.test.json.JsonContent;
-import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 
-
-@Ignore
-@RunWith(SpringRunner.class)
-@JsonTest(excludeFilters = { @Filter(RandomDiceService.class), @Filter(PlayController.class), @Filter(SnakeEyesApplication.class)})
 public class RollOutcomeTest {
 
     @Autowired
     private JacksonTester<RollOutcome> json;
+
+    @Before
+    public void before() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        JacksonTester.initFields(this, objectMapper);
+    }
 
     @Test
     public void verifyJsonMatchesBrief() throws IOException {

@@ -29,6 +29,7 @@ How to play
 
 It is deployed to an heroku app [d5andy-dice-game](https://d5andy-dice-game.herokuapp.com/snakeeyes/play?stake=1.0).
 You can play it there.
+NB first call is likely to take a while as Heroku puts free hobby dynos to sleep after a while and it takes a while to wake them up. 
     
 How to build
 ------------
@@ -62,5 +63,7 @@ The action 'Play' fires a 'GET' request to the REST endpoint and displays the JS
 Improvements
 ------------
 
-* Pull more random numbers than required for each game - to protect against outages of the random number server
-* Resolve the problem with `RollOutcomeTest`
+* Pull more random numbers than required for each game - 
+    * to protect against outages of the random number server
+    * to improve performance
+* Consider using a logging framework (for random number service errors)

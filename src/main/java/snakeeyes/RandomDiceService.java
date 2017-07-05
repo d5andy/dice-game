@@ -1,5 +1,6 @@
 package snakeeyes;
 
+import jdk.nashorn.internal.runtime.logging.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -26,13 +27,16 @@ public class RandomDiceService {
     }
 
     public Optional<List<Integer>> randomDice(int number) {
-        ResponseEntity<String> responseEntity = requestIntegers(number);
-        if (successful(responseEntity)) {
-            List<Integer> integers = convertToIntegers(responseEntity.getBody());
-            return of(integers);
-        } else {
-            return empty();
+        try {
+            ResponseEntity<String> responseEntity = requestIntegers(number);
+            if (successful(responseEntity)) {
+                List<Integer> integers = convertToIntegers(responseEntity.getBody());
+                return of(integers);
+            }
+        } catch (Throwable e) {
+            System.out.println("RandomDiceService::Error:" + e.getMessage());
         }
+        return empty();
     }
 
     private ResponseEntity<String> requestIntegers(int number) {
