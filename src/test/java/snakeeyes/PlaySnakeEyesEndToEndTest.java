@@ -19,7 +19,8 @@ import static org.mockito.BDDMockito.given;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class PlaySnakeEyesEndToEndTest {
 
-    private static final String EXPECTED_OUTCOME = "{\"dice1\":1,\"dice2\":1,\"stake\":1.0,\"winnings\":30.0,\"payout_name\":\"snake eyes\"}";;
+    private static final String EXPECTED_OUTCOME_SNAKE_EYES = "{\"dice1\":1,\"dice2\":1,\"stake\":1.0,\"winnings\":30.0,\"payout_name\":\"snake eyes\"}";;
+    private static final String EXPECTED_OUTCOME_PAIR = "{\"dice1\":2,\"dice2\":2,\"stake\":1.0,\"winnings\":7.0,\"payout_name\":\"pair\"}";;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -28,14 +29,25 @@ public class PlaySnakeEyesEndToEndTest {
     private RandomDiceService randomDiceService;
 
     @Test
-    public void verifyOutcome() {
+    public void verifyOutcomeSnakeEyes() {
 
         given(randomDiceService.randomDice(2)).willReturn(Optional.of(ImmutableList.of(1, 1)));
 
         ResponseEntity<String> responseEntity = playWithStake("1.0");
 
-        successful(responseEntity);
+        successful(responseEntity, EXPECTED_OUTCOME_SNAKE_EYES);
     }
+
+    @Test
+    public void verifyOutcomePair() {
+
+        given(randomDiceService.randomDice(2)).willReturn(Optional.of(ImmutableList.of(2, 2)));
+
+        ResponseEntity<String> responseEntity = playWithStake("1.0");
+
+        successful(responseEntity, EXPECTED_OUTCOME_PAIR);
+    }
+
 
     @Test
     public void stakeIsInteger() {
@@ -44,7 +56,7 @@ public class PlaySnakeEyesEndToEndTest {
 
         ResponseEntity<String> responseEntity = playWithStake("1");
 
-        successful(responseEntity);
+        successful(responseEntity, EXPECTED_OUTCOME_SNAKE_EYES);
     }
 
     @Test
@@ -78,9 +90,9 @@ public class PlaySnakeEyesEndToEndTest {
         assertEquals(424, responseEntity.getStatusCodeValue());
     }
 
-    private void successful(ResponseEntity<String> responseEntity) {
+    private void successful(ResponseEntity<String> responseEntity, String outcome) {
         assertEquals(200, responseEntity.getStatusCodeValue());
-        assertEquals(EXPECTED_OUTCOME, responseEntity.getBody());
+        assertEquals(outcome, responseEntity.getBody());
     }
 
     private ResponseEntity<String> playWithNoStake() {

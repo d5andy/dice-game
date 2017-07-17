@@ -32,8 +32,9 @@ public class PlayController {
     }
 
     private ResponseEntity<RollOutcome> calculateTheWinnings(Stake stake, List<Integer> dice) {
-        double winnings = snakeEyesGame.calculateWinnings(dice, stake);
-        return ResponseEntity.ok(new RollOutcome(dice.get(0), dice.get(1), stake.value, winnings, "snake eyes"));
+        Payout payout = snakeEyesGame.calculateWinnings(dice);
+        return ResponseEntity.ok(new RollOutcome(dice.get(0), dice.get(1), stake.value,
+                stake.value * payout.getMultiplier(), payout.getName()));
     }
 
     private ResponseEntity badStakeQueryParameterResponse() {
